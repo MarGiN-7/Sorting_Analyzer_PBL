@@ -6,6 +6,7 @@
 #include "analyzer.h"
 #include "metrics.h"
 #include "timer.h"
+#include "colors.h"
 
 #include "bubble_sort.h"
 #include "selection_sort.h"
@@ -15,16 +16,6 @@
 #include "count_sort.h"
 
 using namespace std;
-
-// ANSI color codes (disabled for Windows compatibility)
-const string RESET = "";
-const string BOLD = "";
-const string CYAN = "";
-const string GREEN = "";
-const string YELLOW = "";
-const string RED = "";
-const string MAGENTA = "";
-const string BLUE = "";
 
 struct AlgoResult {
     string name;
@@ -83,39 +74,38 @@ void runAnalysis(const vector<int>& arr,
 
     // Print beautiful table header
     cout << "\n\n";
-    cout << CYAN << BOLD;
+    COLOR_CYAN;
     cout << "=====================================================================\n";
     cout << "| " << setw(18) << left << "Algorithm" << " | "
          << setw(14) << left << "Time (ms)" << " | "
          << setw(14) << left << "Comparisons" << " | "
          << setw(14) << left << "Swaps" << " |\n";
     cout << "=====================================================================\n";
-    cout << RESET;
+    COLOR_RESET;
 
     // Print rows with alternating colors
     for (size_t i = 0; i < results.size(); i++) {
         const AlgoResult& res = results[i];
-        string color;
 
         if (i % 2 == 0) {
-            color = GREEN;
+            COLOR_GREEN;
         } else {
-            color = BLUE;
+            COLOR_YELLOW;
         }
 
-        cout << color << BOLD << "| ";
+        cout << "| ";
         cout << setw(18) << left << res.name << " | ";
-        cout << RESET << color;
         cout << setw(14) << fixed << setprecision(4) << left << res.time << " | ";
         cout << setw(14) << left << res.comparisons << " | ";
         cout << setw(14) << left << res.swaps << " |";
-        cout << RESET << "\n";
+        COLOR_RESET;
+        cout << "\n";
     }
 
     // Print table footer
-    cout << CYAN << BOLD;
+    COLOR_CYAN;
     cout << "=====================================================================\n";
-    cout << RESET;
+    COLOR_RESET;
 
     // Print performance summary
     if (!results.empty()) {
@@ -134,14 +124,28 @@ void runAnalysis(const vector<int>& arr,
             }
         }
 
-        cout << "\n" << MAGENTA << BOLD << "--- PERFORMANCE SUMMARY ---" << RESET << "\n";
-        cout << GREEN << "FASTEST: " << RESET << results[fastestIdx].name
+        cout << "\n";
+        COLOR_MAGENTA;
+        cout << "--- PERFORMANCE SUMMARY ---\n";
+        COLOR_RESET;
+        COLOR_GREEN;
+        cout << "FASTEST: ";
+        COLOR_RESET;
+        cout << results[fastestIdx].name
              << " (" << fixed << setprecision(4) << results[fastestIdx].time << " ms)\n";
-        cout << RED << "SLOWEST: " << RESET << results[slowestIdx].name
+        COLOR_RED;
+        cout << "SLOWEST: ";
+        COLOR_RESET;
+        cout << results[slowestIdx].name
              << " (" << fixed << setprecision(4) << results[slowestIdx].time << " ms)\n";
-        cout << YELLOW << "DIFFERENCE: " << RESET
-             << fixed << setprecision(4) << (maxTime - minTime) << " ms\n";
+        COLOR_YELLOW;
+        cout << "DIFFERENCE: ";
+        COLOR_RESET;
+        cout << fixed << setprecision(4) << (maxTime - minTime) << " ms\n";
     }
 
-    cout << "\n" << CYAN << BOLD << "=====================================================================\n" << RESET;
+    cout << "\n";
+    COLOR_CYAN;
+    cout << "=====================================================================\n";
+    COLOR_RESET;
 }

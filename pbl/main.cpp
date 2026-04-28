@@ -5,25 +5,18 @@
 #include "input_handler.h"
 #include "data_generator.h"
 #include "analyzer.h"
+#include "colors.h"
 
 using namespace std;
 
-// ANSI color codes (disabled for Windows compatibility)
-const string RESET = "";
-const string BOLD = "";
-const string CYAN = "";
-const string GREEN = "";
-const string YELLOW = "";
-const string MAGENTA = "";
-
 void printTitle() {
-    cout << CYAN << BOLD;
+    COLOR_CYAN;
     cout << "====================================================\n";
     cout << "                                                    \n";
     cout << "   SORTING PERFORMANCE ANALYZER                    \n";
     cout << "                                                    \n";
     cout << "====================================================\n";
-    cout << RESET;
+    COLOR_RESET;
 }
 
 int main() {
@@ -32,56 +25,83 @@ int main() {
     vector<int> arr;
     int method = getInputMethod();
 
-    cout << "\n" << YELLOW << "────────────────────────────────────────────────────\n" << RESET;
+    cout << "\n";
+    COLOR_YELLOW;
+    cout << "────────────────────────────────────────────────────\n";
+    COLOR_RESET;
 
     if (method == 1) {
-        cout << GREEN << "✓ Data Generation Mode Selected\n" << RESET;
+        COLOR_GREEN;
+        cout << "✓ Data Generation Mode Selected\n";
+        COLOR_RESET;
         int n = getArraySize();
         int type = getDataType();
         arr = generateData(n, type);
-        cout << GREEN << "✓ Data generated successfully.\n" << RESET;
-        cout << CYAN << "\nGenerated Array (" << arr.size() << " elements):\n" << RESET;
-        cout << YELLOW << "[ ";
+        COLOR_GREEN;
+        cout << "✓ Data generated successfully.\n";
+        COLOR_RESET;
+        COLOR_CYAN;
+        cout << "\nGenerated Array (" << arr.size() << " elements):\n";
+        COLOR_RESET;
+        COLOR_YELLOW;
+        cout << "[ ";
         for (size_t i = 0; i < arr.size() && i < 20; i++) {
             cout << arr[i] << " ";
         }
         if (arr.size() > 20) cout << "... ";
-        cout << "]\n" << RESET;
+        cout << "]\n";
+        COLOR_RESET;
     }
     else if (method == 2) {
-        cout << GREEN << "✓ Manual Input Mode Selected\n" << RESET;
+        COLOR_GREEN;
+        cout << "✓ Manual Input Mode Selected\n";
+        COLOR_RESET;
         arr = getManualArray();
-        cout << GREEN << "✓ Array captured successfully.\n" << RESET;
-        cout << CYAN << "\nInput Array:\n" << RESET;
-        cout << YELLOW << "[ ";
+        COLOR_GREEN;
+        cout << "✓ Array captured successfully.\n";
+        COLOR_RESET;
+        COLOR_CYAN;
+        cout << "\nInput Array:\n";
+        COLOR_RESET;
+        COLOR_YELLOW;
+        cout << "[ ";
         for (int x : arr) {
             cout << x << " ";
         }
-        cout << "]\n" << RESET;
+        cout << "]\n";
+        COLOR_RESET;
     }
     else {
-        cout << "\033[31m" << BOLD << "✗ Invalid choice. Exiting...\n" << RESET;
+        COLOR_RED;
+        cout << "✗ Invalid choice. Exiting...\n";
+        COLOR_RESET;
         return 0;
     }
 
-    cout << YELLOW << "────────────────────────────────────────────────────\n" << RESET;
+    cout << "\n";
+    COLOR_YELLOW;
+    cout << "────────────────────────────────────────────────────\n";
+    COLOR_RESET;
 
     vector<int> algos = getAlgorithmChoices();
 
     if (algos.empty()) {
-        cout << "\033[31m" << BOLD << "✗ No algorithms selected. Exiting...\n" << RESET;
+        COLOR_RED;
+        cout << "✗ No algorithms selected. Exiting...\n";
+        COLOR_RESET;
         return 0;
     }
 
     runAnalysis(arr, algos);
 
-    cout << "\n" << MAGENTA << BOLD;
+    cout << "\n";
+    COLOR_MAGENTA;
     cout << "====================================================\n";
     cout << "                                                    \n";
     cout << "          ANALYSIS COMPLETE                         \n";
     cout << "                                                    \n";
     cout << "====================================================\n";
-    cout << RESET;
+    COLOR_RESET;
 
     return 0;
 }
