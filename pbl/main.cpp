@@ -27,18 +27,18 @@ int main() {
 
     cout << "\n";
     COLOR_YELLOW;
-    cout << "────────────────────────────────────────────────────\n";
+    cout << "-----------------------------------------------------\n";
     COLOR_RESET;
 
     if (method == 1) {
         COLOR_GREEN;
-        cout << "✓ Data Generation Mode Selected\n";
+        cout << "[OK] Data Generation Mode Selected\n";
         COLOR_RESET;
         int n = getArraySize();
         int type = getDataType();
         arr = generateData(n, type);
         COLOR_GREEN;
-        cout << "✓ Data generated successfully.\n";
+        cout << "[OK] Data generated successfully.\n";
         COLOR_RESET;
         COLOR_CYAN;
         cout << "\nGenerated Array (" << arr.size() << " elements):\n";
@@ -54,11 +54,11 @@ int main() {
     }
     else if (method == 2) {
         COLOR_GREEN;
-        cout << "✓ Manual Input Mode Selected\n";
+        cout << "[OK] Manual Input Mode Selected\n";
         COLOR_RESET;
         arr = getManualArray();
         COLOR_GREEN;
-        cout << "✓ Array captured successfully.\n";
+        cout << "[OK] Array captured successfully.\n";
         COLOR_RESET;
         COLOR_CYAN;
         cout << "\nInput Array:\n";
@@ -73,21 +73,21 @@ int main() {
     }
     else {
         COLOR_RED;
-        cout << "✗ Invalid choice. Exiting...\n";
+        cout << "[ERROR] Invalid choice. Exiting...\n";
         COLOR_RESET;
         return 0;
     }
 
     cout << "\n";
     COLOR_YELLOW;
-    cout << "────────────────────────────────────────────────────\n";
+    cout << "-----------------------------------------------------\n";
     COLOR_RESET;
 
     vector<int> algos = getAlgorithmChoices();
 
     if (algos.empty()) {
         COLOR_RED;
-        cout << "✗ No algorithms selected. Exiting...\n";
+        cout << "[ERROR] No algorithms selected. Exiting...\n";
         COLOR_RESET;
         return 0;
     }
